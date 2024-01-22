@@ -12,5 +12,20 @@ public class SayHelloController {
 	public String sayHello() {
 		return "Hello ! How are you?";
 	}
-
+	
+	@RequestMapping("say-hello-html")
+	@ResponseBody
+	public String sayHelloHtml() {
+		StringBuffer sb = new StringBuffer();
+			sb.append("<html>");
+			sb.append("<head>");
+			sb.append("<title>Hello !</title>");
+			sb.append("</head>");
+			sb.append("<body>");
+			sb.append("How are you ?");
+			sb.append("</body>");
+			sb.append("</html>");
+	    return sb.toString();
+		
+	}
 }
