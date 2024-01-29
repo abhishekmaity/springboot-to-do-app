@@ -7,7 +7,7 @@
              Welcome to home !
         </div>
         <div>
-            Hello ${name}, your password is ${password}
+            Hello ${name}
         </div>
     </body>
 </html>
