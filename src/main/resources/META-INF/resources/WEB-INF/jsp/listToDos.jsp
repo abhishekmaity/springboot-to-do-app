@@ -2,6 +2,10 @@
 
 <html>
     <head>
+        <link href="webjars/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet" >
+        <script src="webjars/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+        <script src="webjars/jquery/3.6.0/jquery.min.js"></script>
+
         <title>List ToDos Page</title>
     </head>
     <body>
@@ -9,7 +13,7 @@
              Welcome to home !
         </div>
         <div>
-            Hello ${name}. Your todos are 
+            Hello ${name}.
         </div>
         <hr>
         <h1>List of ToDos</h1>
