@@ -11,6 +11,8 @@
         <div>
             Hello ${name}. Your todos are 
         </div>
+        <hr>
+        <h1>List of ToDos</h1>
         <table>
             <thead>
                 <tr>
