@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Login</title>
+        <title>Welcome Page</title>
     </head>
     <body>
         <div>       
@@ -8,6 +8,9 @@
         </div>
         <div>
             Hello ${name}
+        </div>
+        <div>
+            <a href="list-todos">Manage</a> your todos !
         </div>
     </body>
 </html>

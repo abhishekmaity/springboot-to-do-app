@@ -7,7 +7,7 @@
              Welcome to home !
         </div>
         <div>
-            Hello ${todos} This is a Todos page.
+            Hello ${name}. Your todos are ${todos}
         </div>
     </body>
 </html>
