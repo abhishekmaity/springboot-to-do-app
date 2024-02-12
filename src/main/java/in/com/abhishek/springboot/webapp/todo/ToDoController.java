@@ -17,8 +17,6 @@ public class ToDoController {
 	
 	private ToDoService toDoService;
 	
-	
-	
 	public ToDoController(ToDoService toDoService) {
 		super();
 		this.toDoService = toDoService;
@@ -32,14 +30,16 @@ public class ToDoController {
 	}
 	
 	@GetMapping("add-todos")
-	public String showNewToDoPage() {
+	public String showNewToDoPage(ModelMap model) {
+		ToDo toDo = new ToDo(0, "Abhishek", "", LocalDate.now().plusYears(1), false);
+		model.addAttribute("toDo", toDo);
 		return "todo";
 	}
 	
 	@PostMapping("add-todos")
-	public String addNewToDoPage(@RequestParam String description, ModelMap model) {
-		String username = model.get("name").toString();
-		toDoService.addTodo(username, description, 
+	public String addNewToDoPage(ModelMap model, ToDo toDo) {
+		String username = "Abhishek";//model.get("name").toString();
+		toDoService.addTodo(username, toDo.getDescription(), 
 				LocalDate.now().plusYears(1), false);
 		return "redirect:list-todos";
 	}
