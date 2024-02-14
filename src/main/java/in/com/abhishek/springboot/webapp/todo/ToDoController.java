@@ -45,7 +45,7 @@ public class ToDoController {
 			return "todo";
 		String username = "Abhishek";//model.get("name").toString();
 		toDoService.addTodo(username, toDo.getDescription(), 
-				LocalDate.now().plusYears(1), false);
+				toDo.getTargetDate(), false);
 		return "redirect:list-todos";
 	}
 	
@@ -66,7 +66,7 @@ public class ToDoController {
 	public String updateToDos(ModelMap model, @Valid ToDo toDo, BindingResult result) {
 		if(result.hasErrors())
 			return "todo";
-		toDo.setUsername(model.get("name").toString());
+		toDo.setUsername("Abhishek");
 		toDoService.updateTodo(toDo);
 		return "redirect:list-todos";
 	}
