@@ -54,5 +54,21 @@ public class ToDoController {
 		toDoService.deleteById(id);
 		return "redirect:list-todos";
 	}
+	
+	@GetMapping("update-todo")
+	public String showUpdateToDos(@RequestParam int id, ModelMap model) {
+		ToDo toDo = toDoService.updateById(id);
+		model.addAttribute("toDo", toDo);
+		return "todo";
+	}
+	
+	@PostMapping("update-todo")
+	public String updateToDos(ModelMap model, @Valid ToDo toDo, BindingResult result) {
+		if(result.hasErrors())
+			return "todo";
+		toDo.setUsername(model.get("name").toString());
+		toDoService.updateTodo(toDo);
+		return "redirect:list-todos";
+	}
 
 }
