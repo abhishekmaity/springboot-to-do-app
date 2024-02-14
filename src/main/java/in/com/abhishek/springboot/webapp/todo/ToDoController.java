@@ -34,7 +34,7 @@ public class ToDoController {
 	
 	@GetMapping("add-todos")
 	public String showNewToDoPage(ModelMap model) {
-		ToDo toDo = new ToDo(0, "Abhishek", "Enter Description", LocalDate.now().plusYears(1), false);
+		ToDo toDo = new ToDo(0, "Abhishek", "", LocalDate.now().plusYears(1), false);
 		model.addAttribute("toDo", toDo);
 		return "todo";
 	}
