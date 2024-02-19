@@ -9,14 +9,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 @SessionAttributes("name")
-public class LoginController {
+public class WelcomeController {
  
-	private AuthenticationService authenticationService;
-			
-	public LoginController(AuthenticationService authenticationService) {
-			super();
-			this.authenticationService = authenticationService;
-		}
 
 //	@RequestMapping(value="login", method=RequestMethod.GET)
 //	public String gotoLogin() {
@@ -28,21 +22,10 @@ public class LoginController {
 //		return "welcome";
 //	}
 	
-	@GetMapping("login")
-	public String gotoLogin() {
-		return "login";
+	@GetMapping("/")
+	public String gotoWelcomePage(ModelMap model) {
+		model.put("name", "Abhishek");
+		return "welcome";
 	}
 	
-	@PostMapping("login")
-	public String gotoWelcome(@RequestParam String name, @RequestParam String password, ModelMap model) {
-		if(authenticationService.authenticate(name, password)) {
-			model.put("name", name);
-		//  model.put("password", password);
-		return "welcome";
-		}
-		else {
-			model.put("ErrorMsg", "Invalid Credentials ! Please try again");
-			return "login";
-		}
-	}
 }
