@@ -4,7 +4,7 @@
             Welcome to home !
        </div>
        <div>
-           Hello ${name}.
+            <h1>Hello ${name}</h1>
        </div>
        <hr>
         <div>
