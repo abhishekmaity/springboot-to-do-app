@@ -27,7 +27,8 @@ public class ToDoController {
 
 	@RequestMapping("list-todos")
 	public String listAllToDos(ModelMap model) {
-		List<ToDo> todos = toDoService.findByUsername("Abhishek");
+		String username = model.get("name").toString();
+		List<ToDo> todos = toDoService.findByUsername(username);
 		model.addAttribute("todos", todos);
 		return "listToDos";
 	}
@@ -43,7 +44,7 @@ public class ToDoController {
 	public String addNewToDoPage(ModelMap model, @Valid ToDo toDo, BindingResult result) {
 		if(result.hasErrors())
 			return "todo";
-		String username = "Abhishek";//model.get("name").toString();
+		String username = model.get("name").toString();
 		toDoService.addTodo(username, toDo.getDescription(), 
 				toDo.getTargetDate(), false);
 		return "redirect:list-todos";
