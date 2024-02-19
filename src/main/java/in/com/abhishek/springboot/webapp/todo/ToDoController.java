@@ -3,6 +3,8 @@ package in.com.abhishek.springboot.webapp.todo;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -27,7 +29,7 @@ public class ToDoController {
 
 	@RequestMapping("list-todos")
 	public String listAllToDos(ModelMap model) {
-		String username = model.get("name").toString();
+		String username = getUserLoggedInName(model);
 		List<ToDo> todos = toDoService.findByUsername(username);
 		model.addAttribute("todos", todos);
 		return "listToDos";
@@ -44,7 +46,7 @@ public class ToDoController {
 	public String addNewToDoPage(ModelMap model, @Valid ToDo toDo, BindingResult result) {
 		if(result.hasErrors())
 			return "todo";
-		String username = model.get("name").toString();
+		String username = getUserLoggedInName(model);
 		toDoService.addTodo(username, toDo.getDescription(), 
 				toDo.getTargetDate(), false);
 		return "redirect:list-todos";
@@ -70,6 +72,12 @@ public class ToDoController {
 		toDo.setUsername("Abhishek");
 		toDoService.updateTodo(toDo);
 		return "redirect:list-todos";
+	}
+	
+	private String getUserLoggedInName(ModelMap model) {
+		Authentication authentication = 
+				SecurityContextHolder.getContext().getAuthentication();
+		return authentication.getName();
 	}
 
 }
