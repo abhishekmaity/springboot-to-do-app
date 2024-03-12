@@ -2,10 +2,16 @@ package in.com.abhishek.springboot.webapp.todo;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Size;
 
+@Entity
 public class ToDo {
 
+	@Id
+	@GeneratedValue
 	private int id;
 	private String username;
 	
