@@ -3,6 +3,7 @@ package in.abhishek.springboot.restful.services.restfulwebservices.user;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.springframework.stereotype.Component;
 
@@ -20,6 +21,12 @@ public class UserDaoService {
 	
 	public List<User> findAllUsers(){
 		return users;
+	}
+
+	public User findOne(int id) {
+		Predicate<? super User> predicate = user -> user.getId().equals(id);
+		return users.stream().filter(predicate).findFirst().get();
+		
 	}
 	
 
