@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.service.annotation.DeleteExchange;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class UserResource {
 
@@ -41,7 +43,7 @@ public class UserResource {
 	}
 	
 	@PostMapping("/users")
-	public ResponseEntity<Object> createUsers(@RequestBody User user){
+	public ResponseEntity<Object> createUsers(@Valid @RequestBody User user){
 	    User savedUser = service.save(user);
 	    URI location = ServletUriComponentsBuilder
 	    		.fromCurrentRequest()
