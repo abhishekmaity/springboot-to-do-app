@@ -1,13 +1,13 @@
 package in.abhishek.springboot.restful.services.restfulwebservices.filtering;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonFilter;
 
-@JsonIgnoreProperties("field3")
+//@JsonIgnoreProperties("field3")
+@JsonFilter("SomeBeanFilter")
 public class SomeBeans {
 	
 	private String field1;
-	@JsonIgnore
+//	@JsonIgnore
 	private String field2;
 	private String field3;
 	
