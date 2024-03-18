@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import in.abhishek.springboot.restful.services.restfulwebservices.Post;
 import in.abhishek.springboot.restful.services.restfulwebservices.jpa.UserRepository;
 import jakarta.validation.Valid;
 
@@ -49,6 +50,15 @@ public class UserJpaResource {
 	@DeleteMapping("/jpa/users/{id}")
 	public void deleteUsers(@PathVariable int id){
 		repository.deleteById(id);
+	}
+	
+	@GetMapping("/jpa/users/{id}/posts")
+	public List<Post> retrivePostForUsers(@PathVariable int id){
+		Optional<User> user = repository.findById(id);
+		if(user.isEmpty())
+			throw new UserNotFoundException("id: "+id);
+		return user.get().getPosts();
+		
 	}
 	
 	@PostMapping("/jpa/users")
