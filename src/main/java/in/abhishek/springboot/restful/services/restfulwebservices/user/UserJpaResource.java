@@ -26,7 +26,7 @@ public class UserJpaResource {
 
 	private UserRepository repository;
 	
-	public UserJpaResource(UserDaoService service, UserRepository repository) {
+	public UserJpaResource(UserRepository repository) {
 		this.repository = repository;
 	}
 	
