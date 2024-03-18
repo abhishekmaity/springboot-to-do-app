@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import in.abhishek.springboot.restful.services.restfulwebservices.Post;
+import in.abhishek.springboot.restful.services.restfulwebservices.jpa.PostRepository;
 import in.abhishek.springboot.restful.services.restfulwebservices.jpa.UserRepository;
 import jakarta.validation.Valid;
 
@@ -27,8 +28,11 @@ public class UserJpaResource {
 
 	private UserRepository repository;
 	
-	public UserJpaResource(UserRepository repository) {
+	private PostRepository postRepository;
+	
+	public UserJpaResource(UserRepository repository, PostRepository postRepository) {
 		this.repository = repository;
+		this.postRepository = postRepository;
 	}
 	
 	@GetMapping("/jpa/users")
@@ -70,6 +74,24 @@ public class UserJpaResource {
 	    		.buildAndExpand(savedUser.getId())
 	    		.toUri();
 		return ResponseEntity.created(location).build();
+	}
+	
+	@PostMapping("/jpa/users/{id}/posts")
+	public ResponseEntity<Object> createPostForUsers(@PathVariable int id, @Valid @RequestBody Post posts){
+		Optional<User> user = repository.findById(id);
+		if(user.isEmpty())
+			throw new UserNotFoundException("id: "+id);
+		
+		posts.setUser(user.get());
+		Post savedPost = postRepository.save(posts);
+		
+	    URI location = ServletUriComponentsBuilder
+	    		.fromCurrentRequest()
+	    		.path("/{id}")
+	    		.buildAndExpand(savedPost.getId())
+	    		.toUri();
+		return ResponseEntity.created(location).build();
+		
 	}
 }
 
